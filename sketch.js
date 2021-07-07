@@ -20,7 +20,7 @@ function setup(){
   foodStock.on("value",readStock);
 
   dog = createSprite(800,200,150,150);
-  dog.addFood(sadDog);
+  dog.addImage(sadDog);
   dog.scale = 0.15;
 
   feed = createButton("Feed the dog");
@@ -39,7 +39,7 @@ function draw(){
 
   foodObj.display();
 
-  fedTime = database.ref('FeedTime');
+  fedTime = database.ref('fedTime');
   fedTime.on("value",function (data){
     lastFed = data.val();
   })
@@ -62,13 +62,13 @@ function draw(){
 
 
 function readStock(data){
-  foods = data.val();
-  foodObj.updateFoodStock(FoodS);
+  foodS = data.val();
+  foodObj.updateFoodStock(foodS);
 }
 
 
 function feedDog() {
-  dog.addFood(happyDog);
+  dog.addImage(happyDog);
 
   foodObj.updateFoodStock(foodObj.getFoodStock()-1);
   database.ref('/').update({
